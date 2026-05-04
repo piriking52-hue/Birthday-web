@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday — Best Friend</title>
+  <style>
+    :root{
+      --accent:#ff6f61;
+      --accent-2:#ff3b2e;
+      --bg1:#ff9a9e;
+      --bg2:#fad0c4;
+      --card-bg: rgba(255,255,255,0.95);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(120deg,var(--bg1),var(--bg2));
+      min-height:100vh;
+      color:#222;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:30px 16px;
+    }
+
+    /* Container */
+    .wrap{
+      width:100%;
+      max-width:920px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border-radius:18px;
+      padding:28px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      overflow:hidden;
+    }
+
+    h1{margin:0 0 12px 0; font-size:1.6rem; color:var(--accent-2)}
+    p.small{margin:6px 0 0 0; color:#444}
+
+    /* Login */
+    .center {text-align:center}
+    .login-box{
+      max-width:420px;
+      margin:40px auto;
+      background:var(--card-bg);
+      padding:22px;
+      border-radius:12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    .login-box input{
+      width:100%;
+      padding:12px 14px;
+      margin:8px 0;
+      border-radius:8px;
+      border:1px solid rgba(0,0,0,0.08);
+      font-size:1rem;
+    }
+    .btn{
+      display:inline-block;
+      padding:10px 18px;
+      margin-top:10px;
+      border-radius:10px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#fff;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      box-shadow: 0 6px 18px rgba(255,111,97,0.25);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .btn:active{transform:translateY(2px)}
+    .glow {
+      position:relative;
+      overflow:visible;
+    }
+    /* glowing lighting animation for Next button */
+    .glow::after{
+      content:"";
+      position:absolute;
+      left:-40%;
+      top:-40%;
+      width:180%;
+      height:180%;
+      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.25), transparent 10%),
+                  radial-gradient(circle at 80% 80%, rgba(255,255,255,0.12), transparent 10%);
+      transform:rotate(0deg);
+      animation: lightMove 3s linear infinite;
+      pointer-events:none;
+      mix-blend-mode:screen;
+    }
+    @keyframes lightMove{
+      from{transform:translateX(-10%) rotate(0deg)}
+      to{transform:translateX(10%) rotate(360deg)}
+    }
+
+    /* Hidden pages */
+    .hidden{display:none}
+
+    /* Popup zoom */
+    .popup {
+      display:inline-block;
+      background:var(--card-bg);
+      padding:18px 22px;
+      border-radius:12px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      transform-origin:center;
+      animation: zoomIn .7s cubic-bezier(.2,.9,.2,1) forwards;
+      font-size:1.4rem;
+      color:var(--accent-2);
+    }
+    @keyframes zoomIn{
+      from{transform:scale(.2); opacity:0}
+      to{transform:scale(1); opacity:1}
+    }
+
+    /* Magic boxes */
+    .magic-grid{
+      display:flex;
+      gap:18px;
+      justify-content:center;
+      margin-top:28px;
+      flex-wrap:wrap;
+    }
+    .card{
+      width:260px;
+      background:var(--card-bg);
+      border-radius:14px;
+      padding:14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      text-align:center;
+      transition:transform .25s ease, box-shadow .25s ease;
+      cursor:pointer;
+      position:relative;
+    }
+    .card:hover{transform:translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.12)}
+    .card h3{margin:8px 0 6px 0; color:var(--accent-2)}
+    .card p{margin:0; color:#555}
+
+    /* Photo frame style */
+    .photo-frame{
+      border-radius:14px;
+      overflow:hidden;
+      padding:8px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2));
+      border:6px solid rgba(255,255,255,0.6);
+      box-shadow: 0 8px 30px rgba(255,105,97,0.12), inset 0 0 30px rgba(255,111,97,0.06);
+    }
+    .photo-frame img{
+      display:block;
+      width:100%;
+      height:auto;
+      border-radius:10px;
+      box-shadow: 0 8px 30px rgba(255,105,97,0.12);
+      transition:transform .6s ease;
+    }
+    .photo-frame:hover img{transform:scale(1.03)}
+
+    /* Frame page */
+    .frame-page{
+      max-width:720px;
+      margin:18px auto;
+      background:var(--card-bg);
+      padding:18px;
+      border-radius:12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+    .frame-wish{
+      margin-top:12px;
+      font-weight:700;
+      color:var(--accent-2);
+      font-size:1.05rem;
+    }
+    .back-row{display:flex; gap:10px; justify-content:center; margin-top:14px}
+
+    /* Poem & Treat pages */
+    .poem-box{white-space:pre-line; text-align:left; padding:12px; color:#333; font-size:1rem}
+    .treat-box{font-size:1.1rem; font-weight:700; color:var(--accent-2)}
+
+    /* Thanks page with bubbles */
+    .thanks-wrap{
+      position:relative;
+      padding:40px 20px;
+      border-radius:12px;
+      overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      text-align:center;
+    }
+    .thanks-wrap h2{color:var(--accent-2); margin:0 0 8px 0}
+    .thanks-wrap p{color:#444; margin:0 0 12px 0}
+
+    /* bubbles */
+    .bubbles{
+      position:absolute;
+      left:0; top:0; right:0; bottom:0;
+      pointer-events:none;
+      overflow:hidden;
+    }
+    .bubble{
+      position:absolute;
+      bottom:-120px;
+      width:18px;
+      height:18px;
+      background:rgba(255,255,255,0.6);
+      border-radius:50%;
+      animation: rise 8s linear infinite;
+      filter: blur(0.6px);
+      opacity:0.9;
+    }
+    @keyframes rise{
+      0%{transform:translateY(0) scale(0.6); opacity:0}
+      10%{opacity:0.9}
+      100%{transform:translateY(-120vh) scale(1.2); opacity:0}
+    }
+
+    /* Responsive: make photo larger on phone */
+    @media (max-width:600px){
+      .card{width:100%}
+      .photo-frame img{height:auto}
+      .login-box{margin-top:20px}
+      .wrap{padding:18px}
+      .popup{font-size:1.2rem}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div id="loginView" class="center">
+      <div class="login-box">
+        <h1>Login</h1>
+        <p class="small">Enter username and password to open the surprise</p>
+        <input id="username" type="text" placeholder="Username" autocomplete="off" />
+        <input id="password" type="password" placeholder="Password" autocomplete="off" />
+        <div style="display:flex; gap:10px; justify-content:center; margin-top:8px">
+          <button class="btn" onclick="doLogin()">Login</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup after login -->
+    <div id="popupView" class="center hidden">
+      <div class="popup">🎉 Happy Birthday Best Friend 🎉</div>
+      <div style="margin-top:18px">
+        <button class="btn glow" onclick="openMagic()">Next</button>
+      </div>
+    </div>
+
+    <!-- Magic boxes -->
+    <div id="magicView" class="hidden">
+      <h1 class="center">Magic Boxes</h1>
+      <p class="small center">Click a box to open</p>
+
+      <div class="magic-grid" style="margin-top:18px">
+        <!-- 1: Photo Frame -->
+        <div class="card" onclick="openFrame()">
+          <div class="photo-frame">
+            <img src="birthday.jpg" alt="Birthday Photo" id="thumbPhoto">
+          </div>
+          <h3>Birthday Frame</h3>
+          <p>Open to add a wishing line & view full photo</p>
+        </div>
+
+        <!-- 2: Poem -->
+        <div class="card" onclick="openPoem()">
+          <h3>Poem</h3>
+          <p>Small poem for my best friend</p>
+        </div>
+
+        <!-- 3: Treat -->
+        <div class="card" onclick="openTreat()">
+          <h3>Treat Venum</h3>
+          <p>Click to reveal the treat plan</p>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:20px">
+        <button class="btn" onclick="goToThanks()">Next</button>
+      </div>
+    </div>
+
+    <!-- Frame page (with back button) -->
+    <div id="frameView" class="hidden">
+      <div class="frame-page">
+        <div style="display:flex; gap:14px; align-items:flex-start; flex-wrap:wrap;">
+          <div style="flex:1; min-width:240px">
+            <div class="photo-frame">
+              <img src="D:\nithaniya bd folder\WhatsApp Image 2026-04-30 at 22.21.50.jpeg" alt= id="fullPhoto">
+            </div>
+          </div>
+          <div style="flex:1; min-width:220px; text-align:left;">
+            <h3 style="margin-top:6px; color:var(--accent-2)">Wishing Line</h3>
+            <div style="margin-top:8px">
+              <textarea id="wishText" rows="6" style="width:100%; padding:10px; border-radius:8px; border:1px solid rgba(0,0,0,0.08); font-size:1rem"
+                placeholder="Type your wishing line here. Example: 'Happy Birthday! You mean the world to me.'"></textarea>
+            </div>
+            <div class="back-row">
+              <button class="btn" onclick="saveWish()">Save</button>
+              <button class="btn" onclick="backToMagic()">Back</button>
+            </div>
+            <div id="savedWish" style="margin-top:12px; color:#444; font-weight:600"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Poem page -->
+    <div id="poemView" class="hidden">
+      <div class="frame-page">
+        <h3 style="color:var(--accent-2)">A Small Poem for You</h3>
+        <div class="poem-box" id="poemText">
+Roses are red,
+Violets are blue,
+My life is brighter,
+Because of you.
+
+You laugh, I laugh,
+You cry, I care,
+Best friend forever,
+A bond so rare.
+        </div>
+        <div style="text-align:center; margin-top:12px">
+          <button class="btn" onclick="backToMagic()">Back</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Treat page -->
+    <div id="treatView" class="hidden">
+      <div class="frame-page">
+        <h3 style="color:var(--accent-2)">Treat Venum</h3>
+        <div class="treat-box" style="margin-top:8px">
+         Machcha ennaku biriyani soda chocolates and mukkiyama tea venum .........        </div>
+        <div style="text-align:center; margin-top:12px">
+          <button class="btn" onclick="backToMagic()">Back</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thanks page with bubbles and final poem -->
+    <div id="thanksView" class="hidden">
+      <div class="thanks-wrap">
+        <div class="bubbles" id="bubbles"></div>
+        <h2>✨ Thanks for being my Best Friend ✨</h2>
+        <p style="font-weight:700; color:var(--accent-2)">You make every day brighter</p>
+        <p style="margin-top:12px; color:#444">
+Like bubbles in the sky,
+Our laughter will fly high.
+Memories we make,
+Are treasures we take.
+        </p>
+        <div style="margin-top:18px">
+          <button class="btn" onclick="restart()">Close</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Initial view
+    const loginView = document.getElementById('loginView');
+    const popupView = document.getElementById('popupView');
+    const magicView = document.getElementById('magicView');
+    const frameView = document.getElementById('frameView');
+    const poemView = document.getElementById('poemView');
+    const treatView = document.getElementById('treatView');
+    const thanksView = document.getElementById('thanksView');
+
+    function hideAll(){
+      loginView.classList.add('hidden');
+      popupView.classList.add('hidden');
+      magicView.classList.add('hidden');
+      frameView.classList.add('hidden');
+      poemView.classList.add('hidden');
+      treatView.classList.add('hidden');
+      thanksView.classList.add('hidden');
+    }
+
+    // Login logic
+    function doLogin(){
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+      if(user === 'best friend' && pass === '0506'){
+        hideAll();
+        popupView.classList.remove('hidden');
+      } else {
+        alert('You are fool');
+      }
+    }
+
+    // Open magic boxes
+    function openMagic(){
+      hideAll();
+      magicView.classList.remove('hidden');
+    }
+
+    // Frame open/save/back
+    function openFrame(){
+      hideAll();
+      frameView.classList.remove('hidden');
+      // ensure full photo fits phone: set width via CSS already responsive
+      // show saved wish if any
+      const saved = localStorage.getItem('wishText') || '';
+      document.getElementById('wishText').value = saved;
+      document.getElementById('savedWish').textContent = saved ? 'Saved: ' + saved : '';
+    }
+    function saveWish(){
+      const txt = document.getElementById('wishText').value.trim();
+      localStorage.setItem('wishText', txt);
+      document.getElementById('savedWish').textContent = txt ? 'Saved: ' + txt : '';
+      // small visual feedback
+      document.getElementById('savedWish').style.color = '#2b8a6f';
+      setTimeout(()=>{ document.getElementById('savedWish').style.color = '#444'; }, 1800);
+    }
+    function backToMagic(){
+      hideAll();
+      magicView.classList.remove('hidden');
+    }
+
+    // Poem & Treat
+    function openPoem(){
+      hideAll();
+      poemView.classList.remove('hidden');
+    }
+    function openTreat(){
+      hideAll();
+      treatView.classList.remove('hidden');
+    }
+
+    // Thanks page
+    function goToThanks(){
+      hideAll();
+      thanksView.classList.remove('hidden');
+      createBubbles();
+    }
+
+    // Restart (go back to login)
+    function restart(){
+      hideAll();
+      loginView.classList.remove('hidden');
+      // clear inputs
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+    }
+
+    // Bubbles generator
+    function createBubbles(){
+      const container = document.getElementById('bubbles');
+      container.innerHTML = '';
+      const count = 18;
+      for(let i=0;i<count;i++){
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        const size = Math.random()*36 + 12;
+        b.style.width = size + 'px';
+        b.style.height = size + 'px';
+        b.style.left = (Math.random()*100) + '%';
+        b.style.animationDuration = (6 + Math.random()*6) + 's';
+        b.style.opacity = (0.4 + Math.random()*0.6);
+        b.style.background = `rgba(255,255,255,${0.35 + Math.random()*0.5})`;
+        container.appendChild(b);
+      }
+    }
+
+    // Make sure images are responsive and large enough on phones
+    // (No extra JS needed; CSS handles responsiveness)
+  </script>
+</body>
+</html>
